@@ -60,7 +60,24 @@ app.use('/api', apiLimiter);
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Health Check
+// Health Check & Root Info
+app.get('/', (req, res) => {
+  res.status(200).json({
+    status: 'online',
+    service: 'Avenue Multi-Specialty Hospital Backend API',
+    version: '1.0.0',
+    documentation: 'All API routes are served under /api prefix',
+    endpoints: {
+      health: '/api/health',
+      doctors: '/api/doctors',
+      departments: '/api/departments',
+      appointments: '/api/appointments',
+      auth: '/api/auth',
+      payments: '/api/payments'
+    }
+  });
+});
+
 app.get('/api/health', (req, res) => {
   res.status(200).json({
     status: 'healthy',
