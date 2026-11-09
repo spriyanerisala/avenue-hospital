@@ -18,6 +18,7 @@ import {
 import { appointmentService, authService } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
+import { resolveImageUrl } from '../utils/imageResolver';
 
 export const PatientDashboard = () => {
   const { user, setUser } = useAuth();
@@ -187,8 +188,12 @@ export const PatientDashboard = () => {
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-center gap-3">
                       <img
-                        src={appt.doctor?.image_url || '/src/assets/images/doctors/cardiologist.jpg'}
+                        src={resolveImageUrl(appt.doctor?.image_url, 'doctor')}
                         alt={appt.doctor?.name}
+                        onError={(e) => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src = '/images/doctors/cardiologist.jpg';
+                        }}
                         className="w-12 h-12 rounded-xl object-cover"
                       />
                       <div>

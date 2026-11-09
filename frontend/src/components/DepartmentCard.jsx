@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { resolveImageUrl } from '../utils/imageResolver';
 
 export const DepartmentCard = ({ department }) => {
   return (
@@ -8,8 +9,12 @@ export const DepartmentCard = ({ department }) => {
       {/* Department Image */}
       <div className="relative h-48 overflow-hidden bg-slate-100 dark:bg-slate-800">
         <img
-          src={department.image_url}
+          src={resolveImageUrl(department.image_url, 'department')}
           alt={department.name}
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = '/images/departments/cardiology.jpg';
+          }}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
         />

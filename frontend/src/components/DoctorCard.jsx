@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Star, Award, Calendar, Clock, DollarSign } from 'lucide-react';
+import { resolveImageUrl } from '../utils/imageResolver';
 
 export const DoctorCard = ({ doctor }) => {
   return (
@@ -8,8 +9,12 @@ export const DoctorCard = ({ doctor }) => {
       {/* Doctor Image with Overlay Badge */}
       <div className="relative h-64 overflow-hidden bg-slate-100 dark:bg-slate-800">
         <img
-          src={doctor.image_url}
+          src={resolveImageUrl(doctor.image_url, 'doctor')}
           alt={doctor.name}
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = '/images/doctors/cardiologist.jpg';
+          }}
           className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
         />

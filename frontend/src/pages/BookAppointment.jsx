@@ -22,6 +22,7 @@ import {
 import { departmentService, doctorService, appointmentService, paymentService } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
+import { resolveImageUrl } from '../utils/imageResolver';
 
 export const BookAppointment = () => {
   const [searchParams] = useSearchParams();
@@ -410,8 +411,12 @@ export const BookAppointment = () => {
                     }`}
                   >
                     <img
-                      src={doc.image_url}
+                      src={resolveImageUrl(doc.image_url, 'doctor')}
                       alt={doc.name}
+                      onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = '/images/doctors/cardiologist.jpg';
+                      }}
                       className="w-12 h-12 rounded-xl object-cover"
                     />
                     <div className="overflow-hidden">
@@ -651,8 +656,12 @@ export const BookAppointment = () => {
             {/* Doctor & Appointment Summary Card */}
             <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 flex flex-col sm:flex-row items-center gap-4">
               <img
-                src={selectedDoctor?.image_url}
+                src={resolveImageUrl(selectedDoctor?.image_url, 'doctor')}
                 alt={selectedDoctor?.name}
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = '/images/doctors/cardiologist.jpg';
+                }}
                 className="w-20 h-20 rounded-2xl object-cover shrink-0"
               />
               <div className="flex-1 text-center sm:text-left">
