@@ -1,0 +1,448 @@
+// In-memory persistent data store mimicking Supabase schema for complete offline and demo reliability
+export const store = {
+  profiles: [
+    {
+      id: 'usr_admin_001',
+      full_name: 'Dr. Gregory House (Chief Medical Officer)',
+      email: 'admin@avenuehospital.com',
+      phone: '+1 (800) 427-9000',
+      role: 'admin',
+      created_at: '2026-01-01T00:00:00.000Z'
+    },
+    {
+      id: 'usr_doc_001',
+      full_name: 'Dr. Anthony F. Chen',
+      email: 'anthony.chen@avenuehospital.com',
+      phone: '+1 (800) 427-101',
+      role: 'doctor',
+      created_at: '2026-01-05T00:00:00.000Z'
+    },
+    {
+      id: 'usr_doc_002',
+      full_name: 'Dr. Sarah Jenkins',
+      email: 'sarah.jenkins@avenuehospital.com',
+      phone: '+1 (800) 427-102',
+      role: 'doctor',
+      created_at: '2026-01-05T00:00:00.000Z'
+    },
+    {
+      id: 'usr_pat_001',
+      full_name: 'Johnathan Doe',
+      email: 'patient@demo.com',
+      phone: '+1 (555) 234-5678',
+      role: 'patient',
+      created_at: '2026-02-01T00:00:00.000Z'
+    }
+  ],
+
+  departments: [
+    {
+      id: 'dept_cardio',
+      name: 'Cardiology',
+      slug: 'cardiology',
+      description: 'Comprehensive cardiovascular care including interventional cardiology, heart failure management, and advanced cardiac diagnostics.',
+      image_url: '/src/assets/images/departments/cardiology.jpg',
+      icon: 'Heart',
+      head_doctor: 'Dr. Anthony F. Chen, MD, FACC',
+      phone: '+1 (800) 427-8001',
+      services: ['Coronary Angiography', 'Echocardiography (TTE/TEE)', 'Pacemaker Implantation', 'Cardiac Rehabilitation', 'Heart Failure Clinic'],
+      is_active: true
+    },
+    {
+      id: 'dept_neuro',
+      name: 'Neurology & Stroke Care',
+      slug: 'neurology',
+      description: 'State-of-the-art diagnostic and medical treatments for complex brain, spinal cord, and peripheral nervous system disorders.',
+      image_url: '/src/assets/images/departments/neurology.jpg',
+      icon: 'Brain',
+      head_doctor: 'Dr. Sarah Jenkins, MD, FAAN',
+      phone: '+1 (800) 427-8002',
+      services: ['Comprehensive Stroke Center', 'Video EEG Monitoring', 'Multiple Sclerosis Care', 'Parkinson & Movement Disorders', 'Sleep Studies'],
+      is_active: true
+    },
+    {
+      id: 'dept_ortho',
+      name: 'Orthopedics & Spine',
+      slug: 'orthopedics',
+      description: 'Advanced joint replacements, sports injury rehabilitation, spine surgeries, and trauma reconstruction.',
+      image_url: '/src/assets/images/departments/orthopedics.jpg',
+      icon: 'Activity',
+      head_doctor: 'Dr. Michael Vance, MD',
+      phone: '+1 (800) 427-8003',
+      services: ['Robotic Knee & Hip Arthroplasty', 'Arthroscopic Ligament Reconstruction', 'Minimally Invasive Spine Surgery', 'Sports Injury Clinic'],
+      is_active: true
+    },
+    {
+      id: 'dept_pedia',
+      name: 'Pediatrics & Neonatology',
+      slug: 'pediatrics',
+      description: 'Compassionate pediatric healthcare covering newborn care, developmental assessments, immunizations, and pediatric emergencies.',
+      image_url: '/src/assets/images/departments/pediatrics.jpg',
+      icon: 'Smile',
+      head_doctor: 'Dr. Emily Rodriguez, MD, FAAP',
+      phone: '+1 (800) 427-8004',
+      services: ['Level III NICU & PICU', 'Well-Child Preventive Checkups', 'Pediatric Pulmonology & Allergy', 'Adolescent Healthcare'],
+      is_active: true
+    },
+    {
+      id: 'dept_derma',
+      name: 'Dermatology & Cosmetology',
+      slug: 'dermatology',
+      description: 'Expert clinical and cosmetic dermatology treating skin disorders, laser therapies, and skin cancer screenings.',
+      image_url: '/src/assets/images/departments/dermatology.jpg',
+      icon: 'Sparkles',
+      head_doctor: 'Dr. Priya Sharma, MD',
+      phone: '+1 (800) 427-8005',
+      services: ['Advanced Medical Lasers', 'Skin Cancer Screening & Mohs Surgery', 'Eczema & Psoriasis Center', 'Aesthetic Facial Procedures'],
+      is_active: true
+    },
+    {
+      id: 'dept_genmed',
+      name: 'General Medicine & Diabetology',
+      slug: 'general-medicine',
+      description: 'Primary care and internal medicine focusing on preventive health, chronic illness management, and geriatric care.',
+      image_url: '/src/assets/images/departments/general_medicine.jpg',
+      icon: 'Stethoscope',
+      head_doctor: 'Dr. David Miller, MD',
+      phone: '+1 (800) 427-8006',
+      services: ['Comprehensive Executive Checkups', 'Diabetes & Hypertension Management', 'Geriatric Wellness Programs', 'Infectious Disease Care'],
+      is_active: true
+    },
+    {
+      id: 'dept_gynae',
+      name: 'Gynecology & Obstetrics',
+      slug: 'gynecology',
+      description: 'Comprehensive women\'s health services, prenatal care, high-risk obstetrics, and minimally invasive gynecological surgery.',
+      image_url: '/src/assets/images/departments/gynecology.jpg',
+      icon: 'HeartHandshake',
+      head_doctor: 'Dr. Amanda Lee, MD, FACOG',
+      phone: '+1 (800) 427-8007',
+      services: ['High-Risk Pregnancy Unit', '3D/4D Fetal Ultrasound', 'Laparoscopic Hysterectomy', 'PCOS & Menopause Clinics'],
+      is_active: true
+    },
+    {
+      id: 'dept_dental',
+      name: 'Dental Sciences & Maxillofacial',
+      slug: 'dentistry',
+      description: 'Full-spectrum oral healthcare including dental implants, orthodontics, cosmetic smile makeovers, and periodontal care.',
+      image_url: '/src/assets/images/departments/dentistry.jpg',
+      icon: 'Award',
+      head_doctor: 'Dr. James Wilson, DDS',
+      phone: '+1 (800) 427-8008',
+      services: ['Digital Guided Implants', 'Clear Aligners & Orthodontics', 'Painless Root Canal Treatments', 'Smile Makeovers & Veneers'],
+      is_active: true
+    },
+    {
+      id: 'dept_ophthal',
+      name: 'Ophthalmology & Retina',
+      slug: 'ophthalmology',
+      description: 'Advanced eye care encompassing cataract laser surgery, retinal therapies, glaucoma management, and pediatric vision care.',
+      image_url: '/src/assets/images/departments/ophthalmology.jpg',
+      icon: 'Eye',
+      head_doctor: 'Dr. Elena Rostova, MD',
+      phone: '+1 (800) 427-8009',
+      services: ['Femtosecond Bladeless Cataract Surgery', 'Retinal Laser & Injections', 'Corneal Topography & Lasik', 'Glaucoma Filtration'],
+      is_active: true
+    },
+    {
+      id: 'dept_er',
+      name: 'Emergency & Trauma Care (24/7)',
+      slug: 'emergency-care',
+      description: '24/7 Level-1 trauma and emergency resuscitation center staffed by board-certified emergency physicians.',
+      image_url: '/src/assets/images/departments/emergency.jpg',
+      icon: 'ShieldAlert',
+      head_doctor: 'Dr. Marcus Vance, MD, FACEP',
+      phone: '+1 (800) 427-9911',
+      services: ['24/7 Cardiac Catheterization Lab', 'Dedicated Acute Stroke Response', 'Polytrauma Operating Suites', 'Critical Care Ambulances'],
+      is_active: true
+    }
+  ],
+
+  doctors: [
+    {
+      id: 'doc_cardio_1',
+      department_id: 'dept_cardio',
+      name: 'Dr. Anthony F. Chen',
+      email: 'anthony.chen@avenuehospital.com',
+      phone: '+1 (800) 427-101',
+      specialization: 'Senior Interventional Cardiologist',
+      qualification: 'MD, FACC, FSCAI (Harvard Medical)',
+      experience_years: 18,
+      consultation_fee: 1200,
+      bio: 'Dr. Anthony Chen is an internationally recognized interventional cardiologist with over 18 years of pioneering work in minimally invasive heart therapies, transcatheter valves, and complex coronary interventions.',
+      image_url: '/src/assets/images/doctors/cardiologist.jpg',
+      rating: 4.95,
+      review_count: 142,
+      is_featured: true,
+      is_active: true,
+      available_days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      time_slots: ['09:00 AM', '10:00 AM', '11:30 AM', '02:00 PM', '03:30 PM', '04:30 PM']
+    },
+    {
+      id: 'doc_neuro_1',
+      department_id: 'dept_neuro',
+      name: 'Dr. Sarah Jenkins',
+      email: 'sarah.jenkins@avenuehospital.com',
+      phone: '+1 (800) 427-102',
+      specialization: 'Chief Neurologist & Stroke Specialist',
+      qualification: 'MD, FAAN (Johns Hopkins University)',
+      experience_years: 15,
+      consultation_fee: 1100,
+      bio: 'Dr. Sarah Jenkins leads the Neuro-Vascular Institute at Avenue Hospital. She specializes in rapid stroke interventions, intractable epilepsy therapies, and neuromodulation treatments.',
+      image_url: '/src/assets/images/doctors/neurologist.jpg',
+      rating: 4.92,
+      review_count: 118,
+      is_featured: true,
+      is_active: true,
+      available_days: ['Monday', 'Tuesday', 'Thursday', 'Friday', 'Saturday'],
+      time_slots: ['09:30 AM', '10:30 AM', '11:30 AM', '02:30 PM', '04:00 PM']
+    },
+    {
+      id: 'doc_ortho_1',
+      department_id: 'dept_ortho',
+      name: 'Dr. Michael Vance',
+      email: 'michael.vance@avenuehospital.com',
+      phone: '+1 (800) 427-103',
+      specialization: 'Senior Orthopedic & Joint Surgeon',
+      qualification: 'MS (Orthopedics), MCh (Stanford Medical)',
+      experience_years: 16,
+      consultation_fee: 1000,
+      bio: 'A pioneer in robotic-assisted joint reconstructive surgery. Dr. Vance has helped thousands of athletes and seniors regain mobility with fast-track recovery protocols.',
+      image_url: '/src/assets/images/doctors/orthopedic.jpg',
+      rating: 4.88,
+      review_count: 96,
+      is_featured: true,
+      is_active: true,
+      available_days: ['Monday', 'Wednesday', 'Thursday', 'Saturday'],
+      time_slots: ['09:00 AM', '11:00 AM', '02:00 PM', '03:00 PM', '05:00 PM']
+    },
+    {
+      id: 'doc_pedia_1',
+      department_id: 'dept_pedia',
+      name: 'Dr. Emily Rodriguez',
+      email: 'emily.rodriguez@avenuehospital.com',
+      phone: '+1 (800) 427-104',
+      specialization: 'Lead Pediatric Specialist',
+      qualification: 'MD, FAAP (Columbia University)',
+      experience_years: 12,
+      consultation_fee: 800,
+      bio: 'Dr. Rodriguez provides comprehensive child-centered medicine with warmth and dedication, emphasizing early developmental milestones, pediatric immunity, and family well-being.',
+      image_url: '/src/assets/images/doctors/pediatrician.jpg',
+      rating: 4.96,
+      review_count: 164,
+      is_featured: true,
+      is_active: true,
+      available_days: ['Monday', 'Tuesday', 'Wednesday', 'Friday', 'Saturday'],
+      time_slots: ['10:00 AM', '11:00 AM', '01:00 PM', '03:00 PM', '04:30 PM']
+    },
+    {
+      id: 'doc_derma_1',
+      department_id: 'dept_derma',
+      name: 'Dr. Priya Sharma',
+      email: 'priya.sharma@avenuehospital.com',
+      phone: '+1 (800) 427-105',
+      specialization: 'Consultant Dermatologist & Aesthetic Surgeon',
+      qualification: 'MD (Dermatology), DNB (Oxford Fellow)',
+      experience_years: 11,
+      consultation_fee: 900,
+      bio: 'Specialist in cutting-edge laser technologies, complex dermatological treatments, acne scar remodeling, and preventive anti-aging therapies.',
+      image_url: '/src/assets/images/doctors/dermatologist.jpg',
+      rating: 4.89,
+      review_count: 87,
+      is_featured: false,
+      is_active: true,
+      available_days: ['Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      time_slots: ['10:00 AM', '11:30 AM', '02:00 PM', '04:00 PM']
+    },
+    {
+      id: 'doc_genmed_1',
+      department_id: 'dept_genmed',
+      name: 'Dr. David Miller',
+      email: 'david.miller@avenuehospital.com',
+      phone: '+1 (800) 427-106',
+      specialization: 'Senior Internal Medicine Physician',
+      qualification: 'MD (Internal Medicine), FACP',
+      experience_years: 20,
+      consultation_fee: 750,
+      bio: 'A trusted diagnostician with two decades of experience coordinating care for complex multi-organ medical issues, preventive health checks, and chronic diseases.',
+      image_url: '/src/assets/images/doctors/general_physician.jpg',
+      rating: 4.91,
+      review_count: 130,
+      is_featured: true,
+      is_active: true,
+      available_days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      time_slots: ['08:30 AM', '10:00 AM', '11:30 AM', '02:00 PM', '03:30 PM', '05:00 PM']
+    },
+    {
+      id: 'doc_gynae_1',
+      department_id: 'dept_gynae',
+      name: 'Dr. Amanda Lee',
+      email: 'amanda.lee@avenuehospital.com',
+      phone: '+1 (800) 427-107',
+      specialization: 'Senior Obstetrician & Gynecologist',
+      qualification: 'MD, FACOG (UCSF Medical School)',
+      experience_years: 14,
+      consultation_fee: 950,
+      bio: 'Passionate about women’s reproductive health across all life stages, high-risk prenatal guidance, and single-incision laparoscopic procedures.',
+      image_url: '/src/assets/images/doctors/gynecologist.jpg',
+      rating: 4.94,
+      review_count: 112,
+      is_featured: false,
+      is_active: true,
+      available_days: ['Monday', 'Wednesday', 'Thursday', 'Saturday'],
+      time_slots: ['09:00 AM', '10:30 AM', '01:30 PM', '03:30 PM']
+    },
+    {
+      id: 'doc_dental_1',
+      department_id: 'dept_dental',
+      name: 'Dr. James Wilson',
+      email: 'james.wilson@avenuehospital.com',
+      phone: '+1 (800) 427-108',
+      specialization: 'Consultant Maxillofacial & Dental Surgeon',
+      qualification: 'DDS, MS (University of Pennsylvania)',
+      experience_years: 13,
+      consultation_fee: 700,
+      bio: 'Leading cosmetic dentist and oral surgeon specialized in pain-free computerized implants, full-mouth reconstruction, and precision restorative aesthetics.',
+      image_url: '/src/assets/images/doctors/dentist.jpg',
+      rating: 4.87,
+      review_count: 79,
+      is_featured: false,
+      is_active: true,
+      available_days: ['Tuesday', 'Thursday', 'Friday', 'Saturday'],
+      time_slots: ['09:00 AM', '11:00 AM', '02:00 PM', '04:00 PM']
+    },
+    {
+      id: 'doc_ophthal_1',
+      department_id: 'dept_ophthal',
+      name: 'Dr. Elena Rostova',
+      email: 'elena.rostova@avenuehospital.com',
+      phone: '+1 (800) 427-109',
+      specialization: 'Senior Vitreoretinal & Cataract Surgeon',
+      qualification: 'MD (Ophthalmology), FEBO',
+      experience_years: 17,
+      consultation_fee: 1050,
+      bio: 'Renowned ophthalmologist offering micro-incision cataract surgery, macular degeneration management, and specialized refractive treatments.',
+      image_url: '/src/assets/images/doctors/ophthalmologist.jpg',
+      rating: 4.93,
+      review_count: 98,
+      is_featured: false,
+      is_active: true,
+      available_days: ['Monday', 'Tuesday', 'Wednesday', 'Friday'],
+      time_slots: ['10:00 AM', '11:30 AM', '02:30 PM', '04:30 PM']
+    }
+  ],
+
+  appointments: [
+    {
+      id: 'apt_1001',
+      patient_id: 'usr_pat_001',
+      doctor_id: 'doc_cardio_1',
+      department_id: 'dept_cardio',
+      patient_name: 'Johnathan Doe',
+      patient_email: 'patient@demo.com',
+      patient_phone: '+1 (555) 234-5678',
+      patient_age: 42,
+      patient_gender: 'Male',
+      appointment_date: new Date(Date.now() + 86400000 * 2).toISOString().split('T')[0],
+      appointment_time: '10:00 AM',
+      appointment_type: 'In-Person',
+      reason: 'Routine annual cardiology review and blood pressure assessment.',
+      status: 'confirmed',
+      payment_status: 'paid',
+      consultation_fee: 1200,
+      created_at: new Date(Date.now() - 86400000).toISOString()
+    },
+    {
+      id: 'apt_1002',
+      patient_id: 'usr_pat_001',
+      doctor_id: 'doc_neuro_1',
+      department_id: 'dept_neuro',
+      patient_name: 'Johnathan Doe',
+      patient_email: 'patient@demo.com',
+      patient_phone: '+1 (555) 234-5678',
+      patient_age: 42,
+      patient_gender: 'Male',
+      appointment_date: new Date(Date.now() - 86400000 * 5).toISOString().split('T')[0],
+      appointment_time: '02:30 PM',
+      appointment_type: 'In-Person',
+      reason: 'Recurrent migraine evaluation.',
+      status: 'completed',
+      payment_status: 'paid',
+      consultation_fee: 1100,
+      created_at: new Date(Date.now() - 86400000 * 7).toISOString()
+    }
+  ],
+
+  payments: [
+    {
+      id: 'pay_001',
+      appointment_id: 'apt_1001',
+      razorpay_order_id: 'order_hospital_1001',
+      razorpay_payment_id: 'pay_hospital_1001_success',
+      amount: 1200,
+      currency: 'INR',
+      status: 'captured',
+      method: 'Razorpay UPI / NetBanking',
+      created_at: new Date(Date.now() - 86400000).toISOString()
+    },
+    {
+      id: 'pay_002',
+      appointment_id: 'apt_1002',
+      razorpay_order_id: 'order_hospital_1002',
+      razorpay_payment_id: 'pay_hospital_1002_success',
+      amount: 1100,
+      currency: 'INR',
+      status: 'captured',
+      method: 'Razorpay Card',
+      created_at: new Date(Date.now() - 86400000 * 7).toISOString()
+    }
+  ],
+
+  reviews: [
+    {
+      id: 'rev_1',
+      doctor_id: 'doc_cardio_1',
+      patient_name: 'Michael Henderson',
+      rating: 5,
+      comment: 'Dr. Anthony Chen is an exceptional cardiologist. The entire team at Avenue Hospital handled my coronary evaluation with top-tier professionalism.',
+      created_at: '2026-02-10T12:00:00.000Z'
+    },
+    {
+      id: 'rev_2',
+      doctor_id: 'doc_neuro_1',
+      patient_name: 'Eleanor Vance',
+      rating: 5,
+      comment: 'Dr. Sarah Jenkins is so thorough, gentle, and knowledgeable. Her stroke rehabilitation plan worked wonders for my mother.',
+      created_at: '2026-02-15T15:30:00.000Z'
+    },
+    {
+      id: 'rev_3',
+      doctor_id: 'doc_ortho_1',
+      patient_name: 'David Kirkland',
+      rating: 5,
+      comment: 'Robotic knee replacement with Dr. Vance was practically painless. I was walking independently within two weeks!',
+      created_at: '2026-02-20T09:15:00.000Z'
+    },
+    {
+      id: 'rev_4',
+      doctor_id: 'doc_pedia_1',
+      patient_name: 'Clara Miller',
+      rating: 5,
+      comment: 'Dr. Emily is truly the best pediatrician. Our kids actually look forward to clinic visits. Wonderful bedside manner.',
+      created_at: '2026-02-28T14:40:00.000Z'
+    }
+  ],
+
+  contact_messages: [
+    {
+      id: 'msg_1',
+      name: 'Samantha Reed',
+      email: 'samantha.reed@example.com',
+      phone: '+1 (555) 789-0123',
+      subject: 'Inquiry regarding Executive Cardiac Checkup Package',
+      message: 'Hello, I would like to know the available dates and fasting instructions for the comprehensive cardiac checkup for my parents.',
+      status: 'unread',
+      created_at: '2026-03-01T08:20:00.000Z'
+    }
+  ]
+};

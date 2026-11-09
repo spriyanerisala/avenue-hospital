@@ -1,0 +1,13 @@
+# Environment Variables & Secrets (CRITICAL: NEVER PUSH TO GIT)
+.env
+.env.*
+*.env
+!.env.example
+
+# Dependencies
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
